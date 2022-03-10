@@ -7,10 +7,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: false }));
 // app.use(express.static('public'));
 
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     res.send('<h1>Hello world!</h1>')
 });
-
-
 
 app.listen(PORT, () => console.log(`Server listening on Port: ${PORT}`));
