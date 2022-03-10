@@ -1,8 +1,9 @@
 const express = require("express");
 const morgan = require("morgan");
-const { db } = require("./models");
+const { db, Page, User } = require("./models");
 const path = require("path");
 const app = express();
+const PORT = 5432;
 
 db.authenticate().then(() => {
   console.log("connected to the database");
@@ -17,6 +18,19 @@ app.get("/", (req, res, next) => {
   res.send("<h1>Hello world!</h1>");
 });
 
-const PORT = 3000;
+const seed = async () => {
 
-app.listen(PORT, () => console.log(`Server listening on Port: ${PORT}`));
+  await db.sync({force: true});
+
+  // await Page.sync();
+  // await User.sync();
+
+  app.listen(PORT, () => console.log(`Server listening on Port: ${PORT}`));
+
+}
+
+seed();
+
+
+
+
